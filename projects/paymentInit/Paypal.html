@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+</head>
+
+<body>
+  <div id="paypal-button"></div>
+
+  <script>
+      paypal.Button.render({
+          locale: 'zh_CN', 
+          env: 'sandbox',
+
+          commit: true,
+          client: {
+              sandbox:    'it-facilitator@xindom.com',
+              production: 'AQsnUq0fhGKcRlDTvQgLuPK1Nz7B7W_Ed_E_VevJF_YgOvoCJETyCXK0KqmoKYG5B1RrOyq05mG_pRKt'
+          },
+          style: {
+              size: 'small',
+              color: 'silver',
+              shape: 'pill',
+              label: 'checkout',
+              tagline: false
+          },
+
+          payment: function(data, actions) {
+              return actions.payment.create({
+                  payment: {
+                      transactions: [
+                          {
+                              amount: { total: 'amount', currency: 'USD' }
+                          }
+                      ]
+                  }
+              });
+          },
+
+          onAuthorize: function(data, actions) {
+              return actions.payment.execute().then(function(payment) {
+                  $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    data: {}
+                  }).done(function (data) {
+                      if (data == '0') {
+                          alert('The payment is complete!');
+                          window.location.reload();
+                      }else {
+                          alert('pay fail')
+                      }
+                  })
+              });
+          },
+
+          onCancel: function(data, actions) {
+             
+          },
+
+          onError: function(err) {
+           
+          }
+      }, '#paypal-button');
+  </script>
+</body>
