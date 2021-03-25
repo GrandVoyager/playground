@@ -1,0 +1,70 @@
+{
+  "name": "@paypal/sdk-client",
+  "version": "4.0.149",
+  "description": "Shared config between PayPal/Braintree.",
+  "main": "index.js",
+  "scripts": {
+    "babel": "babel ./server --ignore=node_modules --out-dir ./server",
+    "build": "npm run test && npm run doc",
+    "clean": "rimraf dist coverage",
+    "debug": "cross-env NODE_ENV=debug",
+    "doc": "esdoc",
+    "flow": "flow",
+    "flow-typed": "rm -rf ./flow-typed && flow-typed install",
+    "karma": "cross-env NODE_ENV=test babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/karma start",
+    "lint": "eslint src/ server/ test/ *.js",
+    "reinstall": "rimraf flow-typed && rimraf node_modules && npm install && flow-typed install",
+    "release": "./publish.sh",
+    "release:major": "./publish.sh major",
+    "release:minor": "./publish.sh minor",
+    "release:patch": "./publish.sh patch",
+    "setup": "npm install && npm run flow-typed",
+    "test": "npm run lint && npm run flow-typed && npm run flow && npm run jest && npm run karma",
+    "webpack": "babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/webpack --progress",
+    "jest": "jest test/server --env=node --no-cache --collectCoverageFrom='server/' --coverage --verbose --runInBand --silent=false",
+    "prepublishOnly": "npm run babel",
+    "postpublish": "rm -rf ./server && git checkout ./server"
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "server/",
+    "__sdk__.js",
+    "test/globals.js"
+  ],
+  "browserslist": [
+    "IE >= 11",
+    "chrome >= 27",
+    "firefox >= 30",
+    "safari >= 7",
+    "opera >= 23"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/paypal/paypal-sdk-client.git"
+  },
+  "keywords": [
+    "template"
+  ],
+  "license": "Apache-2.0",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "@paypal/sdk-constants": "^1.0.94",
+    "beaver-logger": "^4.0.0",
+    "belter": "^1.0.146",
+    "bowser": "^2.0.0",
+    "jsx-pragmatic": "^2",
+    "zalgo-promise": "^1.0.46"
+  },
+  "devDependencies": {
+    "babel-core": "7.0.0-bridge.0",
+    "cheerio": "1.0.0-rc.3",
+    "esdoc": "1.1.0",
+    "esdoc-flow-type-plugin": "1.1.0",
+    "esdoc-standard-plugin": "1.0.0",
+    "flow-bin": "0.135.0",
+    "grumbler-scripts": "^3",
+    "mocha": "4.1.0",
+    "sync-browser-mocks": "2.0.8"
+  }
+}
