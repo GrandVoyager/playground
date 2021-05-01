@@ -1,0 +1,25 @@
+.container{
+    margin-top:40px;
+}
+h1{
+    font-family:"Microsoft YaHei";
+    font-weight: 500;
+    font-size:25px;
+}
+h2{
+    font-family:"Microsoft YaHei";
+    font-weight: 525;
+    font-size:15px;
+}
+p{
+    position:absolute;
+    left:10%;
+}
+button{ 
+    background-color:greenyellow;
+    color:white;
+    padding:8px 100px;
+    text-align:center
+   
+}   
+button{position:absolute;bottom: 10px;margin: auto;left: 0;right: 0;} 
